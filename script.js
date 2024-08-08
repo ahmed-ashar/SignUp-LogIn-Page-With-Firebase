@@ -11,16 +11,28 @@ const passwordSignUp = document.getElementById('passwordSignUp');
 const emailSignIn = document.getElementById('emailSignIn');
 const passwordSignIn = document.getElementById('passwordSignIn');
 
-
 signUp.addEventListener('click', function () {
     createUserWithEmailAndPassword(auth, emailSignUp.value, passwordSignUp.value)
         .then((userCredential) => {
             const user = userCredential.user;
             console.log('Signed up:', user);
-            window.location.href = 'Dashboard.html';
+            Swal.fire({
+                title: 'Sign Up Successful!',
+                text: 'You have successfully created your account.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = 'Dashboard.html';
+            });
         })
         .catch((error) => {
-            console.error('Error in sign up:', error.message);
+            console.error('Error in sign up:', error.message);e
+            Swal.fire({
+                title: 'Sign Up Failed!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            });
         });
 });
 
@@ -30,17 +42,31 @@ signIn.addEventListener('click', function () {
         .then((userCredential) => {
             const user = userCredential.user;
             console.log('Logged in:', user);
-            window.location.href = 'Dashboard.html';
+            Swal.fire({
+                title: 'Login Successful!',
+                text: 'You have successfully logged in.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+
+                window.location.href = 'Dashboard.html';
+            });
         })
         .catch((error) => {
             console.error('Error in sign in:', error.message);
+            Swal.fire({
+                title: 'Login Failed!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            });
         });
 });
 
-signUpButton.addEventListener('click', () => {
-    container.classList.add("right-panel-active");
-});
+	signUpButton.addEventListener('click', () => {
+		container.classList.add("right-panel-active");
+	});
 
-signInButton.addEventListener('click', () => {
-    container.classList.remove("right-panel-active");
-});
+	signInButton.addEventListener('click', () => {
+		container.classList.remove("right-panel-active");
+	});

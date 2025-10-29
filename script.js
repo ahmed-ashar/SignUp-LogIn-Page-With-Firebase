@@ -8,7 +8,6 @@ const passwordSignUp = document.getElementById('passwordSignUp');
 const emailSignIn = document.getElementById('emailSignIn');
 const passwordSignIn = document.getElementById('passwordSignIn');
 
-// ======== SIGN UP FUNCTION =========
 signUp.addEventListener('click', function () {
     const email = emailSignUp.value.trim();
     const password = passwordSignUp.value.trim();
@@ -22,10 +21,8 @@ signUp.addEventListener('click', function () {
         return;
     }
 
-    // Get existing users from LocalStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    // Check if email already exists
     const existingUser = users.find(user => user.email === email);
     if (existingUser) {
         Swal.fire({
@@ -36,10 +33,8 @@ signUp.addEventListener('click', function () {
         return;
     }
 
-    // Create new user object
     const newUser = { email, password };
 
-    // Save to LocalStorage
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
@@ -53,7 +48,6 @@ signUp.addEventListener('click', function () {
     });
 });
 
-// ======== SIGN IN FUNCTION =========
 signIn.addEventListener('click', function () {
     const email = emailSignIn.value.trim();
     const password = passwordSignIn.value.trim();
@@ -69,7 +63,6 @@ signIn.addEventListener('click', function () {
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    // Match user credentials
     const user = users.find(u => u.email === email && u.password === password);
 
     if (user) {
@@ -79,7 +72,6 @@ signIn.addEventListener('click', function () {
             icon: 'success',
             confirmButtonText: 'OK'
         }).then(() => {
-            // Save current user (optional)
             localStorage.setItem('currentUser', JSON.stringify(user));
             window.location.href = 'Dashboard.html';
         });
@@ -92,7 +84,6 @@ signIn.addEventListener('click', function () {
     }
 });
 
-// ======== UI PANEL TOGGLE =========
 signUpButton.addEventListener('click', () => {
     container.classList.add("right-panel-active");
 });
